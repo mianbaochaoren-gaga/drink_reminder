@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:shared_preferences/shared_preferences.dart';
 
 final FlutterLocalNotificationsPlugin notificationsPlugin =
@@ -12,7 +13,7 @@ void main() async {
 
   // 只在非 Web 环境下初始化时区和通知（Web 仅用于预览界面）
   if (!kIsWeb) {
-    tz.initializeTimeZones();
+    tz_data.initializeTimeZones();
 
     const iosInit = DarwinInitializationSettings(
       requestAlertPermission: true,

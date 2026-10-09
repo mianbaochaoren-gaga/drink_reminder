@@ -27,7 +27,17 @@ jobs:
           cd ..
 
       - name: Build unsigned iOS
-        run: flutter build ios --release --no-codesign
+        run: |
+          cd ios
+          xcodebuild -workspace Runner.xcworkspace \
+            -scheme Runner \
+            -configuration Release \
+            -sdk iphoneos \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            CONFIGURATION_BUILD_DIR=../build/ios/iphoneos \
+            build
 
       - name: Package as IPA
         run: |
